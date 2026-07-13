@@ -1,0 +1,72 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                    String           @id @default(uuid())
+  username              String           @unique
+  passwordHash          String
+  name                  String
+  role                  String           @default("member") // "member" or "staff"
+  memberSince           String
+  tier                  String           @default("Bronze")
+  location              String           @default("Bangna, Bangkok")
+  avatar                String           @default("")
+  points                Int              @default(0)
+  recycledKg            Float            @default(0.0)
+  co2SavedKg            Float            @default(0.0)
+  hasCompletedOnboarding Boolean          @default(false)
+  weeklyPointGoal       Int              @default(2000)
+  createdAt             DateTime         @default(now())
+  
+  // Material breakdown
+  plasticKg             Float            @default(0.0)
+  paperKg               Float            @default(0.0)
+  glassKg               Float            @default(0.0)
+  organicKg             Float            @default(0.0)
+  ewasteKg              Float            @default(0.0)
+  otherKg               Float            @default(0.0)
+
+  sessions              Session[]
+  depositRequests       DepositRequest[]
+  transactionLogs       TransactionLog[]
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+}
+
+model DepositRequest {
+  id        String   @id // e.g. "PEND-1234"
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wasteType String
+  weight    Float
+  estPoints Int
+  date      String   // Formatted string e.g. "Today, 11:05 AM"
+  notes     String?
+}
+
+model TransactionLog {
+  id           String   @id // e.g. "TX-1234"
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String
+  date         String   // Formatted date
+  points       String   // e.g. "+72" or "-450"
+  positive     Boolean
+  pending      Boolean  @default(false)
+  
+  wasteType    String?
+  weight       Float?
+  station      String?
+  createdAt    DateTime @default(now())
+}
