@@ -412,7 +412,7 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
                 aria-hidden="true"
               >
                 <img 
-                  src="/images/concept-brand.png" 
+                  src="/images/concept-brand.avif" 
                   alt="The Midori Brand Identity Concept" 
                   className="w-full h-full object-cover opacity-95 transition-opacity duration-300 group-hover:opacity-100"
                   onError={(e) => {
