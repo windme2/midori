@@ -200,9 +200,6 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
           aria-label="Main navigation"
         >
           <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#5F7A61]">
-              <Leaf className="h-4 w-4 text-white" aria-hidden="true" />
-            </span>
             <span className="text-lg font-bold tracking-tight">midori</span>
           </div>
           <div className="hidden items-center gap-8 text-sm font-bold text-[#2B2E2C]/70 md:flex">
@@ -247,17 +244,17 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
               them for eco-friendly rewards. Minimalist Japandi aesthetics for a clean earth.
             </p>
             
-            <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <div className="mt-8 flex flex-row flex-nowrap items-stretch gap-3 w-full sm:w-auto">
               <button
                 onClick={onLaunch}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5F7A61] px-8 py-4 font-bold text-white shadow-md transition-all hover:bg-[#4E6750] hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5F7A61] px-4 py-3.5 font-bold text-white shadow-md transition-all hover:bg-[#4E6750] hover:scale-[1.02] active:scale-[0.98] flex-1 min-w-0 sm:flex-initial sm:px-8 sm:py-4 cursor-pointer text-sm sm:text-base whitespace-nowrap"
               >
                 Get Started
-                <ArrowRight className="h-4.5 w-4.5" aria-hidden="true" />
+                <ArrowRight className="h-4 w-4 shrink-0 sm:h-4.5 sm:w-4.5" aria-hidden="true" />
               </button>
               
               {/* Premium Mobile App Download QR Code badge */}
-              <div className="relative group/qr flex items-center gap-2.5 bg-white border border-[#EAEAE6] rounded-xl p-2 px-3 shadow-xs hover:border-[#5F7A61]/30 transition-all cursor-pointer select-none">
+              <div className="relative group/qr flex flex-1 min-w-0 items-center justify-center gap-2 bg-white border border-[#EAEAE6] rounded-xl p-2 px-2.5 shadow-xs hover:border-[#5F7A61]/30 transition-all cursor-pointer select-none sm:flex-initial sm:px-3">
                 <div className="h-10 w-10 bg-white border border-gray-100 rounded-lg p-0.5 flex items-center justify-center shrink-0">
                   <svg className="w-full h-full text-[#2B2E2C]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="100" height="100" fill="white"/>
@@ -273,14 +270,14 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
                     <rect x="80" y="60" width="10" height="10" fill="currentColor"/>
                   </svg>
                 </div>
-                <div className="text-left">
-                  <span className="text-[9px] font-extrabold text-[#5F7A61] uppercase tracking-wider block leading-none">Mobile App</span>
-                  <span className="text-[10px] font-bold text-[#2B2E2C] mt-1 block">Scan to install / launch</span>
+                <div className="text-left min-w-0">
+                  <span className="text-[9px] font-extrabold text-[#5F7A61] uppercase tracking-wider block leading-none truncate">Mobile App</span>
+                  <span className="text-[10px] font-bold text-[#2B2E2C] mt-1 block truncate">Scan to install</span>
                 </div>
                 
                 {/* Large high-res dual popover on hover */}
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-white border border-[#EAEAE6] rounded-2xl p-4 shadow-xl opacity-0 scale-95 pointer-events-none group-hover/qr:opacity-100 group-hover/qr:scale-100 transition-all duration-300 z-50 w-80 flex flex-col items-center gap-3">
-                  <span className="text-[11px] font-extrabold text-[#2B2E2C] uppercase tracking-wider block border-b border-gray-100 pb-1.5 w-full text-center">iOS &amp; Android Apps</span>
+                  <span className="text-[11px] font-extrabold text-[#2B2E2C] uppercase tracking-wider block border-b border-gray-100 pb-1.5 w-full text-center">iOS &amp; Android</span>
                   
                   <div className="grid grid-cols-2 gap-4 w-full">
                     {/* Left: iOS PWA */}
@@ -300,13 +297,13 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
                     <div className="flex flex-col items-center gap-2">
                       <div className="w-24 h-24 bg-white border border-gray-100 rounded-xl p-1.5 flex items-center justify-center shadow-inner min-h-[96px] min-w-[96px]">
                         {qrAndroidUrl ? (
-                          <img src={qrAndroidUrl} alt="Android APK Link" className="w-20 h-20 object-contain" />
+                          <img src={qrAndroidUrl} alt="Android PWA install link" className="w-20 h-20 object-contain" />
                         ) : (
                           <span className="text-[8px] text-gray-400 font-extrabold uppercase tracking-wider animate-pulse">Generating...</span>
                         )}
                       </div>
-                      <span className="text-[9px] font-bold text-[#2B2E2C] text-center leading-none">Android (PWA)</span>
-                      <span className="text-[7px] text-[#2B2E2C]/50 text-center">Add to Home Screen</span>
+                      <span className="text-[9px] font-bold text-[#2B2E2C] text-center leading-none">Android (APK)</span>
+                      <span className="text-[7px] text-[#2B2E2C]/50 text-center">Install native app</span>
                     </div>
                   </div>
                 </div>
@@ -343,7 +340,7 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
 
               {/* App View Header */}
               <div className="px-4 pt-6 pb-3 border-b border-[#EAEAE6] bg-white flex justify-between items-center text-xs font-bold text-[#2B2E2C]">
-                <span className="flex items-center gap-1"><Leaf className="h-3.5 w-3.5 text-[#5F7A61]" /> midori</span>
+                <span className="flex items-center gap-1">midori</span>
                 <span className="text-[9px] bg-[#5F7A61]/10 text-[#5F7A61] px-2 py-0.5 rounded-full">Aiko</span>
               </div>
 
@@ -859,9 +856,6 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
            {/* Column 1: Brand Info */}
            <div className="md:col-span-5 flex flex-col items-start gap-4">
              <div className="flex items-center gap-2">
-               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#5F7A61]">
-                 <Leaf className="h-4 w-4 text-white" aria-hidden="true" />
-               </span>
                <span className="text-lg font-bold tracking-tight text-white">midori</span>
              </div>
              <p className="text-xs leading-relaxed text-white/60 max-w-sm text-left">
