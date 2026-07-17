@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">midori</string>
+    <string name="title_activity_main">midori</string>
+    <string name="package_name">midori.wastebank</string>
+    <string name="custom_url_scheme">midori.wastebank</string>
+</resources>
