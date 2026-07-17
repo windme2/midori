@@ -1,0 +1,12 @@
+{
+	"appId": "eco.midori.wastebank",
+	"appName": "midori",
+	"webDir": "www",
+	"server": {
+		"url": "https://midori-wb.vercel.app",
+		"androidScheme": "https"
+	},
+	"android": {
+		"allowMixedContent": false
+	}
+}
