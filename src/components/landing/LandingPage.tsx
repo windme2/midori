@@ -160,15 +160,17 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
 
   useEffect(() => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://midori-waste-bank.vercel.app'
+    const androidApkUrl = process.env.NEXT_PUBLIC_ANDROID_APK_URL
     
     QRCode.toDataURL(origin, { margin: 1, scale: 6 })
       .then((url) => setQrIosUrl(url))
       .catch((err) => console.error('PWA QR code generation error:', err))
 
-    // Android users scan to open the PWA in Chrome and 'Add to Home Screen'
-    QRCode.toDataURL(origin, { margin: 1, scale: 6 })
-      .then((url) => setQrAndroidUrl(url))
-      .catch((err) => console.error('Android QR code generation error:', err))
+    if (androidApkUrl) {
+      QRCode.toDataURL(androidApkUrl, { margin: 1, scale: 6 })
+        .then((url) => setQrAndroidUrl(url))
+        .catch((err) => console.error('Android APK QR code generation error:', err))
+    }
   }, [])
 
   // Calculations
@@ -297,13 +299,13 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
                     <div className="flex flex-col items-center gap-2">
                       <div className="w-24 h-24 bg-white border border-gray-100 rounded-xl p-1.5 flex items-center justify-center shadow-inner min-h-[96px] min-w-[96px]">
                         {qrAndroidUrl ? (
-                          <img src={qrAndroidUrl} alt="Android PWA install link" className="w-20 h-20 object-contain" />
+                          <img src={qrAndroidUrl} alt="Android APK download link" className="w-20 h-20 object-contain" />
                         ) : (
-                          <span className="text-[8px] text-gray-400 font-extrabold uppercase tracking-wider animate-pulse">Generating...</span>
+                          <span className="text-[8px] text-gray-400 font-extrabold uppercase tracking-wider animate-pulse">Set APK URL</span>
                         )}
                       </div>
                       <span className="text-[9px] font-bold text-[#2B2E2C] text-center leading-none">Android (APK)</span>
-                      <span className="text-[7px] text-[#2B2E2C]/50 text-center">Install native app</span>
+                      <span className="text-[7px] text-[#2B2E2C]/50 text-center">Download native app</span>
                     </div>
                   </div>
                 </div>

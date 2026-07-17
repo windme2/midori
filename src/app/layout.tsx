@@ -17,7 +17,6 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'midori',
   },
-  icons: '/favicon.ico',
 }
 
 export const viewport: Viewport = {
