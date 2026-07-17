@@ -19,7 +19,7 @@ export async function GET() {
         user: true,
       },
       orderBy: {
-        date: 'desc',
+        createdAt: 'desc',
       }
     })
 

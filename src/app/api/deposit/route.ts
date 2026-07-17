@@ -13,11 +13,9 @@ export async function GET() {
 
     const logs = await prisma.transactionLog.findMany({
       where: { userId: user.id },
-      orderBy: { date: 'desc' }, // wait, date is a string, so order by schema id or date? Ordering in memory is also possible.
+      orderBy: { createdAt: 'desc' },
     })
 
-    // To make sure ordering is correct, let's sort by their creation order. Since we don't have createdAt in schema, let's return it as is or order by date.
-    // Let's sort logs
     return NextResponse.json({ success: true, logs })
   } catch (error) {
     console.error('API get transactions error:', error)

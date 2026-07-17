@@ -53,7 +53,9 @@ model DepositRequest {
   estPoints Int
   date      String   // Formatted string e.g. "Today, 11:05 AM"
   notes     String?
+  createdAt DateTime @default(now())
 }
+
 
 model TransactionLog {
   id           String   @id // e.g. "TX-1234"

@@ -99,6 +99,7 @@ export function MobileApp({ role, onRoleChange, tab, onTabChange, onExit }: Mobi
   const [activePendingId, setActivePendingId] = useState<string | null>(null)
   const [activeStaffLogDetail, setActiveStaffLogDetail] = useState<AdminLogEntry | null>(null)
   const [pendingDeposits, setPendingDeposits] = useState<PendingDeposit[]>([])
+  const [staffMembers, setStaffMembers] = useState<any[]>([])
 
   // Notifications State
   const [notifications, setNotifications] = useState<any[]>([
@@ -174,16 +175,22 @@ export function MobileApp({ role, onRoleChange, tab, onTabChange, onExit }: Mobi
 
   const fetchStaffData = async () => {
     try {
-      const resQueue = await fetch('/api/staff/queue')
+      const resQueue = await fetch('/api/admin/queue')
       if (resQueue.ok) {
         const dataQueue = await resQueue.json()
         setPendingDeposits(dataQueue.pendingDeposits)
       }
 
-      const resLogs = await fetch('/api/staff/logs')
+      const resLogs = await fetch('/api/admin/logs')
       if (resLogs.ok) {
         const dataLogs = await resLogs.json()
         setStaffLogs(dataLogs.logs)
+      }
+
+      const resMembers = await fetch('/api/admin/users')
+      if (resMembers.ok) {
+        const dataMembers = await resMembers.json()
+        setStaffMembers(dataMembers.members)
       }
     } catch (err) {
       console.error('fetchStaffData error:', err)
@@ -337,7 +344,7 @@ export function MobileApp({ role, onRoleChange, tab, onTabChange, onExit }: Mobi
     pointsEarned: number
   }) => {
     if (activePendingId) {
-      const res = await fetch('/api/staff/approve', {
+      const res = await fetch('/api/admin/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -366,7 +373,7 @@ export function MobileApp({ role, onRoleChange, tab, onTabChange, onExit }: Mobi
       setActivePendingId(null)
       setActivePrefilledDeposit(null)
     } else {
-      const res = await fetch('/api/staff/collect', {
+      const res = await fetch('/api/admin/collect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -612,6 +619,7 @@ export function MobileApp({ role, onRoleChange, tab, onTabChange, onExit }: Mobi
                   onLogDepositSuccess={handleStaffLogDeposit} 
                   prefilledDeposit={activePrefilledDeposit}
                   onClearPrefilled={() => setActivePrefilledDeposit(null)}
+                  members={staffMembers}
                 />
               ) : (
                 <DepositTab

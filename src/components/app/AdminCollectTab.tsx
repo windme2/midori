@@ -13,8 +13,9 @@ const MOCK_MEMBERS = [
 ]
 
 interface AdminCollectTabProps {
+  members?: Array<{ id: string; name: string; points: number; tier: string; avatar: string }>
   prefilledDeposit?: {
-    member: typeof MOCK_MEMBERS[0]
+    member: { id: string; name: string; points: number; tier: string; avatar: string }
     wasteType: WasteType
     weight: number
   } | null
@@ -32,10 +33,13 @@ interface AdminCollectTabProps {
 export function AdminCollectTab({ 
   onLogDepositSuccess,
   prefilledDeposit,
-  onClearPrefilled
+  onClearPrefilled,
+  members
 }: AdminCollectTabProps) {
+  const activeMembers = members && members.length > 0 ? members : MOCK_MEMBERS
+
   // ── States ────────────────────────────────────────────────────────────────
-  const [selectedMember, setSelectedMember] = useState<typeof MOCK_MEMBERS[0] | null>(null)
+  const [selectedMember, setSelectedMember] = useState<{ id: string; name: string; points: number; tier: string; avatar: string } | null>(null)
   const [scanning, setScanning] = useState(false)
   const [manualIdInput, setManualIdInput] = useState('')
   const [wasteType, setWasteType] = useState<WasteType>('Plastic')
@@ -71,7 +75,7 @@ export function AdminCollectTab({
     setErrorMessage('')
     // Simulate camera scanning a member QR code
     setTimeout(() => {
-      const randomMember = MOCK_MEMBERS[Math.floor(Math.random() * MOCK_MEMBERS.length)]
+      const randomMember = activeMembers[Math.floor(Math.random() * activeMembers.length)]
       setSelectedMember(randomMember)
       setScanning(false)
     }, 1200)
@@ -79,7 +83,7 @@ export function AdminCollectTab({
 
   const handleManualSearch = () => {
     setErrorMessage('')
-    const match = MOCK_MEMBERS.find(
+    const match = activeMembers.find(
       (m) => m.id.toLowerCase() === manualIdInput.trim().toLowerCase() ||
              m.name.toLowerCase().includes(manualIdInput.trim().toLowerCase())
     )
