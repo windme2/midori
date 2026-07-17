@@ -165,9 +165,10 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
       .then((url) => setQrIosUrl(url))
       .catch((err) => console.error('PWA QR code generation error:', err))
 
-    QRCode.toDataURL(`${origin}/app-release.apk`, { margin: 1, scale: 6 })
+    // Android users scan to open the PWA in Chrome and 'Add to Home Screen'
+    QRCode.toDataURL(origin, { margin: 1, scale: 6 })
       .then((url) => setQrAndroidUrl(url))
-      .catch((err) => console.error('APK QR code generation error:', err))
+      .catch((err) => console.error('Android QR code generation error:', err))
   }, [])
 
   // Calculations
@@ -304,8 +305,8 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
                           <span className="text-[8px] text-gray-400 font-extrabold uppercase tracking-wider animate-pulse">Generating...</span>
                         )}
                       </div>
-                      <span className="text-[9px] font-bold text-[#2B2E2C] text-center leading-none">Android (APK)</span>
-                      <span className="text-[7px] text-[#2B2E2C]/50 text-center">Direct Installation</span>
+                      <span className="text-[9px] font-bold text-[#2B2E2C] text-center leading-none">Android (PWA)</span>
+                      <span className="text-[7px] text-[#2B2E2C]/50 text-center">Add to Home Screen</span>
                     </div>
                   </div>
                 </div>
@@ -412,7 +413,7 @@ export function LandingPage({ onLaunch }: LandingPageProps) {
                 aria-hidden="true"
               >
                 <img 
-                  src="/images/concept-brand.avif" 
+                  src="/images/concept-brand.png" 
                   alt="The Midori Brand Identity Concept" 
                   className="w-full h-full object-cover opacity-95 transition-opacity duration-300 group-hover:opacity-100"
                   onError={(e) => {
