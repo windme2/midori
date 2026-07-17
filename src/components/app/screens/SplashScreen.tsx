@@ -10,7 +10,7 @@ export function SplashScreen() {
           <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#5F7A61] shadow-md">
             <Leaf className="h-8 w-8 text-white" />
           </span>
-          <h2 className="text-xl font-bold tracking-tight text-[#2B2E2C] mt-6 animate-pulse">midori.</h2>
+          <h2 className="text-xl font-bold tracking-tight text-[#2B2E2C] mt-6 animate-pulse">midori</h2>
           <p className="text-[10px] text-[#2B2E2C]/40 uppercase tracking-widest font-extrabold mt-1">Waste Bank Platform</p>
         </div>
       </div>
